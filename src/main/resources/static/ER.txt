@@ -1,0 +1,62 @@
+Here is a detailed explanation of the entity relationship diagram for the ride-sharing application, aimed at beginners with examples:
+
+## Entities
+
+The ERD consists of the following main entities:
+
+1. **User**: Represents a user of the ride-sharing application.
+ Each user has an id (unique identifier),
+  roles (list of roles like Rider, Driver, Admin),
+   name, email, password, and a location.
+
+2. **RideRequest**: Represents a request for a ride made by a user. It has an id, the rider (a User entity), status (pending, accepted, rejected), pick-up location, drop-off location, requested time, payment method, fare amount, and a reference to the Rider user.
+
+3. **Ride**: Represents an actual ride that has been accepted and is in progress. It has an id, references to the Rider and Driver users, status (started, in-progress, completed), pick-up and drop-off locations, start and end times, fare amount, one-time password (OTP) for verification, and payment method.
+
+4. **Payment**: Represents a payment made for a ride. It has an id, reference to the Ride, payment status, and payment time.
+
+5. **Wallet**: Represents a user's wallet for storing money. It has an id, reference to the User, current balance, and a list of payments made.
+
+6. **Rating**: Represents a rating given by a user for a ride. It has an id, references to the Ride and User, and a rating type.
+
+## Relationships
+
+The entities have the following relationships:
+
+1. **User** has a one-to-many relationship with **RideRequest**, **Ride**, **Payment**, **Wallet**, and **Rating**:
+   - A user can make multiple ride requests, but each ride request is made by one user.
+   - A user can be a rider or driver in multiple rides, but each ride has one rider and one driver.
+   - A user can make multiple payments, but each payment is made by one user.
+   - A user can have one wallet, and each wallet belongs to one user.
+   - A user can give multiple ratings, but each rating is given by one user.
+
+2. **RideRequest** has a one-to-one relationship with **Ride**:
+   - Each ride request can be associated with at most one ride, and each ride is associated with one ride request.
+
+3. **Ride** has a one-to-one relationship with **Payment**:
+   - Each ride can have at most one payment, and each payment is associated with one ride.
+
+## Examples
+
+1. **Creating a ride request**:
+   - User A (rider) creates a new ride request with pick-up location as "123 Main St" and drop-off location as "456 Oak Ave".
+   - The ride request is saved with a unique id, User A's id as the rider, pending status, requested time, and other details.
+
+2. **Accepting a ride request**:
+   - User B (driver) accepts the ride request made by User A.
+   - The ride request status is updated to accepted, and a new ride entity is created with references to User A (rider) and User B (driver).
+   - The ride entity also includes the pick-up and drop-off locations, start time, and other details.
+
+3. **Making a payment**:
+   - After the ride is completed, a payment entity is created with the ride id, payment status as "pending", and payment time.
+   - User A's wallet balance is checked and updated based on the ride fare.
+   - If User A has sufficient balance, the payment status is updated to "paid". Otherwise, it remains in "pending" status.
+
+4. **Giving a rating**:
+   - After the ride is completed, User A (rider) can give a rating to User B (driver).
+   - A new rating entity is created with the ride id, User A's id, and the rating type (e.g., 5 stars).
+
+This ERD provides a solid foundation for the ride-sharing application, allowing users to request rides, accept rides, make payments, and provide ratings, all while maintaining a clear separation of concerns and relationships between the different entities.
+
+Citations:
+[1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/26805008/157ddfdf-424d-412b-8070-ae0e33c39620/Uber_UML_Diagram_6bee8f589b.pdf
