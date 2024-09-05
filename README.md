@@ -1,4 +1,4 @@
-# Ride-Booking-App
+[UberApp.postman_collection.json](https://github.com/user-attachments/files/16883397/UberApp.postman_collection.json)# Ride-Booking-App
 A fully functional backend of the cab Ride-Booking-App with all API endpoints fully developed and tested.
 
 Low Level Design:
@@ -63,5 +63,224 @@ The entities have the following relationships:
 4. **Giving a rating**:
    - After the ride is completed, User A (rider) can give a rating to User B (driver).
    - A new rating entity is created with the ride id, User A's id, and the rating type (e.g., 5 stars).
+  
+5. 
+[Uploadin{
+	"info": {
+		"_postman_id": "ed83c311-1a6a-415f-bf14-0e8e7abfafe4",
+		"name": "UberApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36415165"
+	},
+	"item": [
+		{
+			"name": "rideRequet",
+			"item": [
+				{
+					"name": "rideRequest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n\"pickupLocation\":{\r\n    \"coordinates\":[\r\n        74.221323,\r\n        28.33423123\r\n    ]\r\n},\r\n\r\n    \"dropOffLocation\":{\r\n    \"coordinates\":[\r\n        74.1213,\r\n        28.234123\r\n    ]\r\n},\r\n\r\n\"paymentMethod\":\"CASH\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/rider/requestRide",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rider",
+								"requestRide"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Driver",
+			"item": [
+				{
+					"name": "acceptRide",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/driver/acceptRide/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"driver",
+								"acceptRide",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "startRide",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"otp\":\"6227\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/driver/startRide/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"driver",
+								"startRide",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "endRide",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/driver/endRide/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"driver",
+								"endRide",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "SignUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"UNag\",\r\n    \"email\":\"nag@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"nag@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "onBoardNewDriver",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI0MSIsImVtYWlsIjoibmFnQGdtYWlsLmNvbSIsInJvbGUiOiJbUklERVJdIiwiaWF0IjoxNzI0Njk0NjI1LCJleHAiOjE3MjQ2OTUyMjV9.x0zHbjaIHDrTfCb6GNOnSLbyo_SSTx0cFHO_ucRoQL-_qusSF6EN2T42aJZxo8Rx",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vehicleId\":\"BADFGHHH\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/onBoardNewDriver/41",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"onBoardNewDriver",
+								"41"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}g UberApp.postman_collection.json…]()
 
 
