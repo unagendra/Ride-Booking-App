@@ -19,9 +19,9 @@ The ERD consists of the following main entities:
 
 1. **User**: Represents a user of the ride-sharing application.Each user has an id (unique identifier), roles (Set of roles like Rider, Driver, Admin), name, email, password, and a location.
 
-2.Rider: Represent rider, Each rider has an id, rating and a reference to the User entity.
+2.**Rider**: Represent rider, Each rider has an id, rating and a reference to the User entity.
 
-3.Driver:Represent driver, Each rider has an id, rating, vechicleID,available (Driver availability), currentLocation and a reference to the User entity.
+3.**Driver**:Represent driver, Each rider has an id, rating, vechicleID,available (Driver availability), currentLocation and a reference to the User entity.
 
 3. **RideRequest**: Represents a request for a ride made by a rider. It has an id, the rider (a User entity), status (PENDING,CONFIRMED,CANCELLED), pick-up location, drop-off location, requested time, payment method (CASH, WALLET), fare amount, and a reference to the Rider user.
 
@@ -54,7 +54,7 @@ The entities have the following relationships:
 ## Example Flow:
 
 1. **Creating a ride request**:
-   - rider creates a new ride request with pick-up location as "123 Main St" (Represted in coordinates [Latitude,Longitude]) and drop-off location as "456 Oak Ave"          (Represted in coordinates[Latitude,Longitude]) and Payment Method.
+   - rider creates a new ride request with pick-up location as "123 Main St" (Represted in coordinates [Latitude,Longitude]) and drop-off location as "456 Oak Ave"     - (Represted in coordinates[Latitude,Longitude]) and Payment Method.
    - The ride request is saved with a unique id, and other details.
    - Fare of the Ride is calculated using Strategy Design Pattern, and it is returned back to the rider.
    - REQUEST: POST localhost:8080/rider/requestRide
@@ -73,21 +73,22 @@ The entities have the following relationships:
    - ![image](https://github.com/user-attachments/assets/dcd2e7cc-4877-426e-893f-aa632e7df846)
    - ![image](https://github.com/user-attachments/assets/bf1bfc94-dbf0-4dd9-b403-23f2eebef0d3)
   
-3.Starting a ride:
-   -Driver starts the ride, by entering otp provided by the Rider.
-   -REQUEST:localhost:8080/driver/startRide/1
-   ![image](https://github.com/user-attachments/assets/177bc977-e20c-44b0-96d4-6f803e291d60)
+3.**Starting a ride**:
+   - Driver starts the ride, by entering otp provided by the Rider.
+   - REQUEST:localhost:8080/driver/startRide/1
+   - ![image](https://github.com/user-attachments/assets/177bc977-e20c-44b0-96d4-6f803e291d60)
 
-   RESPONSE:
-   ![image](https://github.com/user-attachments/assets/88cd7a4e-9250-410b-9b1c-ab1df6520cd1)
-   ![image](https://github.com/user-attachments/assets/8c4f78e6-22ba-49b9-aee2-24695dd3a569)
+   - RESPONSE:
+   - ![image](https://github.com/user-attachments/assets/88cd7a4e-9250-410b-9b1c-ab1df6520cd1)
+   - ![image](https://github.com/user-attachments/assets/8c4f78e6-22ba-49b9-aee2-24695dd3a569)
 
-4.Ending the ride:
--Driver ends the ride, once he reaches the dropOff Location is reached and once payment is made by either through Cash/ wallet Payment.
-REQUEST: POST localhost:8080/driver/endRide/1
+4.**Ending the ride**:
+- Driver ends the ride, once he reaches the dropOff Location is reached and once payment is made by either through Cash/ wallet Payment.
+- REQUEST: POST localhost:8080/driver/endRide/1
+
 RESPONSE:
-![image](https://github.com/user-attachments/assets/e6f7d008-f61c-4419-b53e-e0bff9a2c194)
-![image](https://github.com/user-attachments/assets/3b4c62cc-2922-4db0-8e30-858df0e52508)
+- ![image](https://github.com/user-attachments/assets/e6f7d008-f61c-4419-b53e-e0bff9a2c194)
+- ![image](https://github.com/user-attachments/assets/3b4c62cc-2922-4db0-8e30-858df0e52508)
 
 . **Making a payment**:
    - After the ride is completed, a payment entity is created with the ride id, payment status as "pending", and payment time.
