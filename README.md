@@ -54,8 +54,9 @@ The entities have the following relationships:
 ## Example Flow:
 
 1. **Creating a ride request**:
-   - rider creates a new ride request with pick-up location as "123 Main St" (Represted in coordinates [Latitude,Longitude]) and drop-off location as "456 Oak Ave" (Represted in coordinates[Latitude,Longitude]) and Payment Method.
+   - rider creates a new ride request with pick-up location as "123 Main St" (Represted in coordinates [Latitude,Longitude]) and drop-off location as "456 Oak Ave"          (Represted in coordinates[Latitude,Longitude]) and Payment Method.
    - The ride request is saved with a unique id, and other details.
+   - Fare of the Ride is calculated using Strategy Design Pattern, and it is returned back to the rider.
    - REQUEST: POST localhost:8080/rider/requestRide
    - ![image](https://github.com/user-attachments/assets/09e45e03-ea66-4fdf-add1-63174a5f9692)
   
