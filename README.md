@@ -66,9 +66,13 @@ The entities have the following relationships:
 
 2. **Accepting a ride request**:
    - Driver accepts the ride request made by Rider.
-   - The ride request status is updated to accepted, and a new ride entity is created with references to User A (rider) and User B (driver).
+   - The ride request status is updated to accepted, and a new ride entity is created with references to rider and driver.
    - The ride entity also includes the pick-up and drop-off locations, start time, and other details.
- 
+   - REQUEST: POST localhost:8080/driver/acceptRide/1
+   - RESPONSE:
+   - ![image](https://github.com/user-attachments/assets/dcd2e7cc-4877-426e-893f-aa632e7df846)
+   - ![image](https://github.com/user-attachments/assets/bf1bfc94-dbf0-4dd9-b403-23f2eebef0d3)
+
 
 3. **Making a payment**:
    - After the ride is completed, a payment entity is created with the ride id, payment status as "pending", and payment time.
