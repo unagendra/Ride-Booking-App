@@ -17,20 +17,22 @@ Entity Relationship Diagram:
 
 The ERD consists of the following main entities:
 
-1. **User**: Represents a user of the ride-sharing application.
- Each user has an id (unique identifier),
-  roles (list of roles like Rider, Driver, Admin),
-   name, email, password, and a location.
+1. **User**: Represents a user of the ride-sharing application.Each user has an id (unique identifier), roles (Set of roles like Rider, Driver, Admin), name, email, password, and a location.
 
-2. **RideRequest**: Represents a request for a ride made by a user. It has an id, the rider (a User entity), status (pending, accepted, rejected), pick-up location, drop-off location, requested time, payment method, fare amount, and a reference to the Rider user.
+2.Rider: Represent rider, Each rider has an id, rating and a reference to the User entity.
 
-3. **Ride**: Represents an actual ride that has been accepted and is in progress. It has an id, references to the Rider and Driver users, status (started, in-progress, completed), pick-up and drop-off locations, start and end times, fare amount, one-time password (OTP) for verification, and payment method.
+3.Driver:Represent driver, Each rider has an id, rating, vechicleID,available (Driver availability), currentLocation and a reference to the User entity.
 
-4. **Payment**: Represents a payment made for a ride. It has an id, reference to the Ride, payment status, and payment time.
+3. **RideRequest**: Represents a request for a ride made by a rider. It has an id, the rider (a User entity), status (PENDING,CONFIRMED,CANCELLED), pick-up location, drop-off location, requested time, payment method (CASH, WALLET), fare amount, and a reference to the Rider user.
 
-5. **Wallet**: Represents a user's wallet for storing money. It has an id, reference to the User, current balance, and a list of payments made.
+4. **Ride**: Represents an actual ride that has been created after the Driver accepts Ride Request and is ONGOING.
+It has an id, references to the Rider and Driver users, status (ONFIRMED, ONGOING, ENDED, CANCELLED), pick-up and drop-off locations, start and end times, createdTime, fare , one-time password (OTP) for verification, and payment method.
 
-6. **Rating**: Represents a rating given by a user for a ride. It has an id, references to the Ride and User, and a rating type.
+6. **Payment**: Represents a payment made for a ride. It has an id, reference to the Ride, payment status, and payment time.
+
+7. **Wallet**: Represents a user's wallet for storing money. It has an id, reference to the User, current balance, and a list of payments made.
+
+8. **Rating**: Represents a rating given by a user for a ride. It has an id, references to the Ride and User, and a rating type.
 
 ## Relationships
 
@@ -52,13 +54,20 @@ The entities have the following relationships:
 ## Example Flow:
 
 1. **Creating a ride request**:
-   - User A (rider) creates a new ride request with pick-up location as "123 Main St" and drop-off location as "456 Oak Ave".
-   - The ride request is saved with a unique id, User A's id as the rider, pending status, requested time, and other details.
+   - rider creates a new ride request with pick-up location as "123 Main St" (Represted in coordinates [Latitude,Longitude]) and drop-off location as "456 Oak Ave" (Represted in coordinates[Latitude,Longitude]) and Payment Method.
+   - The ride request is saved with a unique id, and other details.
+   - REQUEST: POST localhost:8080/rider/requestRide
+   - ![image](https://github.com/user-attachments/assets/09e45e03-ea66-4fdf-add1-63174a5f9692)
+  
+   - RESPONSE: ![image](https://github.com/user-attachments/assets/27be01ff-199e-4773-b366-862c40c44522)
+   - ![image](https://github.com/user-attachments/assets/bb5791e5-587f-47a7-91e3-4a09ca07a12e)
+
 
 2. **Accepting a ride request**:
-   - User B (driver) accepts the ride request made by User A.
+   - driver accepts the ride request made by Rider.
    - The ride request status is updated to accepted, and a new ride entity is created with references to User A (rider) and User B (driver).
    - The ride entity also includes the pick-up and drop-off locations, start time, and other details.
+ 
 
 3. **Making a payment**:
    - After the ride is completed, a payment entity is created with the ride id, payment status as "pending", and payment time.
@@ -69,223 +78,5 @@ The entities have the following relationships:
    - After the ride is completed, User A (rider) can give a rating to User B (driver).
    - A new rating entity is created with the ride id, User A's id, and the rating type (e.g., 5 stars).
   
-5. 
-[Uploadin{
-	"info": {
-		"_postman_id": "ed83c311-1a6a-415f-bf14-0e8e7abfafe4",
-		"name": "UberApp",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "36415165"
-	},
-	"item": [
-		{
-			"name": "rideRequet",
-			"item": [
-				{
-					"name": "rideRequest",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\r\n\"pickupLocation\":{\r\n    \"coordinates\":[\r\n        74.221323,\r\n        28.33423123\r\n    ]\r\n},\r\n\r\n    \"dropOffLocation\":{\r\n    \"coordinates\":[\r\n        74.1213,\r\n        28.234123\r\n    ]\r\n},\r\n\r\n\"paymentMethod\":\"CASH\"\r\n\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/rider/requestRide",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"rider",
-								"requestRide"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Driver",
-			"item": [
-				{
-					"name": "acceptRide",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/driver/acceptRide/2",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"driver",
-								"acceptRide",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "startRide",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"otp\":\"6227\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/driver/startRide/1",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"driver",
-								"startRide",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "endRide",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/driver/endRide/1",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"driver",
-								"endRide",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Auth",
-			"item": [
-				{
-					"name": "SignUp",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"UNag\",\r\n    \"email\":\"nag@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/auth/signup",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"auth",
-								"signup"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "login",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"nag@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/auth/login",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "onBoardNewDriver",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI0MSIsImVtYWlsIjoibmFnQGdtYWlsLmNvbSIsInJvbGUiOiJbUklERVJdIiwiaWF0IjoxNzI0Njk0NjI1LCJleHAiOjE3MjQ2OTUyMjV9.x0zHbjaIHDrTfCb6GNOnSLbyo_SSTx0cFHO_ucRoQL-_qusSF6EN2T42aJZxo8Rx",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"vehicleId\":\"BADFGHHH\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/auth/onBoardNewDriver/41",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"auth",
-								"onBoardNewDriver",
-								"41"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		}
-	]
-}g UberApp.postman_collection.json…]()
 
-
+  
