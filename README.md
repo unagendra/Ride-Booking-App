@@ -65,7 +65,7 @@ The entities have the following relationships:
 
 
 2. **Accepting a ride request**:
-   - driver accepts the ride request made by Rider.
+   - Driver accepts the ride request made by Rider.
    - The ride request status is updated to accepted, and a new ride entity is created with references to User A (rider) and User B (driver).
    - The ride entity also includes the pick-up and drop-off locations, start time, and other details.
  
