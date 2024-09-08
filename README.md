@@ -1,4 +1,4 @@
-[UberApp.postman_collection.json](https://github.com/user-attachments/files/16883397/UberApp.postman_collection.json)# Ride-Booking-App
+# Ride-Booking-App
 A fully functional backend of the cab Ride-Booking-App with all API endpoints fully developed and tested.
 
 Low Level Design:
