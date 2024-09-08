@@ -3,6 +3,8 @@ A fully functional backend of the cab Ride-Booking-App with all API endpoints fu
 
 Tech Stack: Spring boot v3.3, Java 22, PostGIS(Postgres Sql extension), OSRM Api, Spring Security, AWS Code pipeline(CI/CD), AWS Elastic bean stalk, RDS Database.
 
+Key Features:
+
 
 Low Level Design:
 
