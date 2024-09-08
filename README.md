@@ -72,14 +72,29 @@ The entities have the following relationships:
    - RESPONSE:
    - ![image](https://github.com/user-attachments/assets/dcd2e7cc-4877-426e-893f-aa632e7df846)
    - ![image](https://github.com/user-attachments/assets/bf1bfc94-dbf0-4dd9-b403-23f2eebef0d3)
+  
+3.Starting a ride:
+   -Driver starts the ride, by entering otp provided by the Rider.
+   -REQUEST:localhost:8080/driver/startRide/1
+   ![image](https://github.com/user-attachments/assets/177bc977-e20c-44b0-96d4-6f803e291d60)
 
+   RESPONSE:
+   ![image](https://github.com/user-attachments/assets/88cd7a4e-9250-410b-9b1c-ab1df6520cd1)
+   ![image](https://github.com/user-attachments/assets/8c4f78e6-22ba-49b9-aee2-24695dd3a569)
 
-3. **Making a payment**:
+4.Ending the ride:
+-Driver ends the ride, once he reaches the dropOff Location is reached and once payment is made by either through Cash/ wallet Payment.
+REQUEST: POST localhost:8080/driver/endRide/1
+RESPONSE:
+![image](https://github.com/user-attachments/assets/e6f7d008-f61c-4419-b53e-e0bff9a2c194)
+![image](https://github.com/user-attachments/assets/3b4c62cc-2922-4db0-8e30-858df0e52508)
+
+. **Making a payment**:
    - After the ride is completed, a payment entity is created with the ride id, payment status as "pending", and payment time.
    - User A's wallet balance is checked and updated based on the ride fare.
    - If User A has sufficient balance, the payment status is updated to "paid". Otherwise, it remains in "pending" status.
 
-4. **Giving a rating**:
+. **Giving a rating**:
    - After the ride is completed, User A (rider) can give a rating to User B (driver).
    - A new rating entity is created with the ride id, User A's id, and the rating type (e.g., 5 stars).
   
